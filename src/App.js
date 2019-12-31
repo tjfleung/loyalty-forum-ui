@@ -10,13 +10,15 @@ class App extends Component {
             username: '',
             location: '',
             message: '',
-            resp: ''
+            resp: '',
+            'messages': []
         }
-
     }
 
     postMessage(e) {
         e.preventDefault();
+
+        this.setState({resp: ''});
 
         const url = 'http://localhost:8000/messages';
 
@@ -51,7 +53,7 @@ class App extends Component {
         });
     }
 
-    //TODO move this to a component
+    //TODO create components for message display
     displayMessage() {
         return (
             <div>
@@ -61,14 +63,53 @@ class App extends Component {
         )
     }
 
-    //TODO create another function to display messages by the entered username. Later move it to a component
+    getMessagesByUsername() {
+        const url = 'http://localhost:8000/messages/' + this.state.username;
+
+        console.log(url);
+
+        // axios.get(url)
+        //     .then(response => this.setState({messages: response.data}))
+        //     .catch(console.log);
+
+        fetch(url)
+            .then(res => {
+                return res.json();
+            })
+            .then((data) => {
+                this.setState({'messages': data})
+                //console.log(data)
+            })
+            .catch(console.log)
+    }
+
+    displayMessagesByUsername() {
+        console.log(this.state.messages);
+
+        return (
+            <ul>
+                {this.state.messages.map(function(message, index) {
+                    return (
+                        <div key={index}>
+                            <h6>{message.username}</h6>
+                            <p>{message.message}</p>
+                        </div>
+                    )
+                })}
+            </ul>
+        )
+    }
 
     render() {
         return (
             <div className="App">
                 <form onSubmit={this.postMessage.bind(this)}>
                     <label>Username:</label>
-                    <input type="text" name="username" id="username" value={this.state.username} onChange={e => this.setState({username: e.target.value})} cols="100" rows="1" />
+                    <input type="text" name="username" id="username" value={this.state.username}
+                           onChange={e => this.setState({username: e.target.value})}
+                           onBlur={event => this.getMessagesByUsername()}
+                           cols="100" rows="1"
+                    />
                     <br/>
 
                     <label>Location:</label>
@@ -84,7 +125,7 @@ class App extends Component {
 
                 {this.displayMessage()}
 
-                <p>TODO display message list submitted by user</p>
+                {this.displayMessagesByUsername()}
             </div>
         );
     }
