@@ -51,6 +51,18 @@ class App extends Component {
         });
     }
 
+    //TODO move this to a component
+    displayMessage() {
+        return (
+            <div>
+                <p>{this.state.resp.username}</p>
+                <p>{this.state.resp.message}</p>
+            </div>
+        )
+    }
+
+    //TODO create another function to display messages by the entered username. Later move it to a component
+
     render() {
         return (
             <div className="App">
@@ -69,7 +81,9 @@ class App extends Component {
 
                     <button>Done</button>
                 </form>
-                <p>TODO display the submitted message</p>
+
+                {this.displayMessage()}
+
                 <p>TODO display message list submitted by user</p>
             </div>
         );
