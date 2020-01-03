@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
 import axios from 'axios';
+import Message from "./components/message/message";
+import Messages from "./components/messages/messages";
 
 class App extends Component {
 
@@ -20,7 +22,7 @@ class App extends Component {
 
         this.setState({resp: ''});
 
-        const url = 'http://localhost:8000/messages';
+        const url = 'http://localhost:5000/messages';
 
         let axiosConfig = {
             headers: {
@@ -46,31 +48,8 @@ class App extends Component {
         });
     }
 
-    //TODO create components for message display
-    displayMessage() {
-        if(this.state.resp) {
-            return (
-                <div>
-                    <h2>{this.state.resp.username} Posted:</h2>
-                    <div className="card">
-                        <div className="card-body">
-                            <h6 className="card-title">{this.state.resp.username}</h6>
-                            <p className="card-text">{this.state.resp.message}</p>
-                        </div>
-                    </div>
-                </div>
-            )
-        }
-    }
-
     getMessagesByUsername() {
-        const url = 'http://localhost:8000/messages/' + this.state.username;
-
-        //console.log(url);
-
-        // axios.get(url)
-        //     .then(response => this.setState({messages: response.data}))
-        //     .catch(console.log);
+        const url = 'http://localhost:5000/messages/' + this.state.username;
 
         fetch(url)
             .then(res => {
@@ -81,28 +60,6 @@ class App extends Component {
                 //console.log(data)
             })
             .catch(console.log)
-    }
-
-    displayMessagesByUsername() {
-        //console.log(this.state.messages);
-
-        return (
-            this.state.messages.map(function(message, index) {
-                return (
-                    <div>
-                        <div key={index}>
-                            <div className="card">
-                                <div className="card-body">
-                                    <h6 className="card-title">{message.username}</h6>
-                                    <p className="card-text">{message.message}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                )
-            })
-        )
     }
 
     render() {
@@ -147,12 +104,17 @@ class App extends Component {
                     <button type="submit" className="btn btn-primary">Done</button>
                 </form>
 
-                <div className="container">
-                    {this.displayMessage()}
-                </div>
+                <br/>
 
                 <div className="container">
-                    {this.displayMessagesByUsername()}
+                    {this.state.resp ? <h2>{this.state.resp.username} Posted:</h2> : null }
+                    {this.state.resp ? <Message message={this.state.resp} /> : null }
+                </div>
+
+                <br/>
+
+                <div className="container">
+                    <Messages messages={this.state.messages} />
                 </div>
             </div>
         );
