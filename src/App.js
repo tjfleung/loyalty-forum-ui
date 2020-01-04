@@ -48,6 +48,18 @@ class App extends Component {
         });
     }
 
+    resetPage() {
+        this.setState(
+            {
+                username: '',
+                location: '',
+                message: '',
+                resp: '',
+                'messages': []
+            }
+        )
+    }
+
     getMessagesByUsername() {
         const url = 'http://localhost:5000/messages/' + this.state.username;
 
@@ -65,7 +77,8 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <form onSubmit={this.postMessage.bind(this)}>
+                <form onSubmit={this.postMessage.bind(this)}
+                      onReset={this.resetPage.bind(this)}>
 
                     <div className="form-group row">
                         <label>Username</label>
@@ -74,7 +87,6 @@ class App extends Component {
                                value={this.state.username}
                                onChange={e => this.setState({username: e.target.value})}
                                onBlur={event => this.getMessagesByUsername()}
-                               cols="100" rows="1"
                                placeholder="Username"
                         />
                     </div>
@@ -85,7 +97,6 @@ class App extends Component {
                                className="form-control"
                                value={this.state.location}
                                onChange={e => this.setState({location: e.target.value})}
-                               cols="100" rows="1"
                                placeholder="Location"
                         />
                     </div>
@@ -96,18 +107,21 @@ class App extends Component {
                                className="form-control"
                                value={this.state.message}
                                onChange={e => this.setState({message: e.target.value})}
-                               cols="100" rows="4"
                                placeholder="Message"
                         />
                     </div>
 
-                    <button type="submit" className="btn btn-primary">Done</button>
+                    <div className="form-group row">
+                        <button type="submit" className="btn btn-primary" id="doneButton">Done</button>
+                        <button type="reset" className="btn btn-secondary mx-2" id="resetButton">Reset</button>
+                    </div>
+
                 </form>
 
                 <br/>
 
                 <div className="container">
-                    {this.state.resp ? <h2>{this.state.resp.username} Posted:</h2> : null }
+                    {this.state.resp ? <h2>{this.state.resp.username} Posted</h2> : null }
                     {this.state.resp ? <Message message={this.state.resp} /> : null }
                 </div>
 

@@ -6,10 +6,8 @@ class Messages extends React.Component {
         return (
             this.props.messages.map(function(message, index) {
                 return (
-                    <div>
-                        <div key={index}>
-                            <Message message={message} />
-                        </div>
+                    <div key={index}>
+                        <Message message={message}/>
                     </div>
                 )
             })
