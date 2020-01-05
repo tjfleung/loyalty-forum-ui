@@ -22,9 +22,8 @@ class App extends Component {
 
         this.setState({resp: ''});
 
-        const url = 'http://localhost:5000/messages';
-
-        //const url = 'http://loyaltyforumapi-env-1.i6bzdysfve.ca-central-1.elasticbeanstalk.com/messages';
+        //const url = 'http://localhost:5000/messages';
+        const url = 'http://loyaltyforumapi-env-1.i6bzdysfve.ca-central-1.elasticbeanstalk.com/messages';
 
         let axiosConfig = {
             headers: {
@@ -63,8 +62,8 @@ class App extends Component {
     }
 
     getMessagesByUsername() {
-        const url = 'http://localhost:5000/messages/' + this.state.username;
-        //const url = 'http://loyaltyforumapi-env-1.i6bzdysfve.ca-central-1.elasticbeanstalk.com/messages/' + this.state.username;
+        //const url = 'http://localhost:5000/messages/' + this.state.username;
+        const url = 'http://loyaltyforumapi-env-1.i6bzdysfve.ca-central-1.elasticbeanstalk.com/messages/' + this.state.username;
 
         fetch(url)
             .then(res => {
