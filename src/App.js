@@ -11,7 +11,7 @@ class App extends Component {
         this.state = {
             username: '',
             location: '',
-            message: '',
+            comment: '',
             resp: '',
             'messages': []
         }
@@ -33,7 +33,7 @@ class App extends Component {
 
         axios.post(url, {
             'username': this.state.username,
-            'message': this.state.message
+            'comment': this.state.comment
         }, axiosConfig)
             .then(response => this.setState({resp: response.data}))
             .catch(error => {
@@ -44,7 +44,7 @@ class App extends Component {
         this.setState({
             username: "",
             location: "",
-            message: ""
+            comment: ""
         });
     }
 
@@ -53,7 +53,7 @@ class App extends Component {
             {
                 username: '',
                 location: '',
-                message: '',
+                comment: '',
                 resp: '',
                 'messages': []
             }
@@ -102,12 +102,12 @@ class App extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label>Message</label>
-                        <input type="text" name="message" id="message"
+                        <label>Comment</label>
+                        <input type="text" name="comment" id="comment"
                                className="form-control"
-                               value={this.state.message}
-                               onChange={e => this.setState({message: e.target.value})}
-                               placeholder="Message"
+                               value={this.state.comment}
+                               onChange={e => this.setState({comment: e.target.value})}
+                               placeholder="Comment"
                         />
                     </div>
 

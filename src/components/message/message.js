@@ -8,7 +8,7 @@ class Message extends React.Component {
                     <div className="card-body">
                         <h6 className="card-title">{this.props.message.username}</h6>
                         <h6 className="card-subtitle">{this.props.message.postedDate}</h6>
-                        <p className="card-text">{this.props.message.message}</p>
+                        <p className="card-text">{this.props.message.comment}</p>
                     </div>
                 </div>
             </div>
