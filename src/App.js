@@ -13,8 +13,28 @@ class App extends Component {
             location: '',
             comment: '',
             resp: '',
-            'messages': []
+            'messages': [],
+            'allMessages': []
         }
+    }
+
+    fetchAllMessages() {
+        //const url = 'http://localhost:5000/messages/';
+        const url = 'http://loyaltyforumapi-env-1.i6bzdysfve.ca-central-1.elasticbeanstalk.com/messages/';
+
+        fetch(url)
+            .then(res => {
+                return res.json();
+            })
+            .then((data) => {
+                this.setState({'allMessages': data})
+                //console.log(data)
+            })
+            .catch(console.log)
+    }
+
+    componentDidMount() {
+        this.fetchAllMessages();
     }
 
     postMessage(e) {
@@ -45,8 +65,10 @@ class App extends Component {
         this.setState({
             username: "",
             location: "",
-            comment: ""
+            comment: "",
+            'messages': []
         });
+
     }
 
     resetPage() {
@@ -62,8 +84,8 @@ class App extends Component {
     }
 
     getMessagesByUsername() {
-        //const url = 'http://localhost:5000/messages/' + this.state.username;
-        const url = 'http://loyaltyforumapi-env-1.i6bzdysfve.ca-central-1.elasticbeanstalk.com/messages/' + this.state.username;
+        const url = 'http://localhost:5000/messages/' + this.state.username;
+        //const url = 'http://loyaltyforumapi-env-1.i6bzdysfve.ca-central-1.elasticbeanstalk.com/messages/' + this.state.username;
 
         fetch(url)
             .then(res => {
@@ -132,7 +154,13 @@ class App extends Component {
                 <br/>
 
                 <div className="container">
+                    {this.state.username ? <h2>Comments From {this.state.username}</h2> : null }
                     <Messages messages={this.state.messages} />
+                </div>
+
+                <div className="container">
+                    <h2>All Comments</h2>
+                    <Messages messages={this.state.allMessages} />
                 </div>
             </div>
         );
