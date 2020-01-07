@@ -19,8 +19,8 @@ class App extends Component {
     }
 
     fetchAllMessages() {
-        const url = 'http://localhost:5000/messages/';
-        //const url = 'http://loyaltyforumapi-env-1.i6bzdysfve.ca-central-1.elasticbeanstalk.com/messages/';
+        //const url = 'http://localhost:5000/messages/';
+        const url = 'http://loyaltyforumapi-env-1.i6bzdysfve.ca-central-1.elasticbeanstalk.com/messages/';
 
         fetch(url)
             .then(res => {
