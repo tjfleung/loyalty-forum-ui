@@ -28,6 +28,15 @@ class Message extends React.Component {
                             {this.state.isReply ? <Reply id={this.props.message.id}/> : null}
                         </div>
                     </div>
+
+                    <div className="card">
+                        <div className="card-body">
+                            <h6 className="card-title">{this.props.message.location.location}</h6>
+                            <p className="card-subtitle">{this.props.message.location.latitude},{this.props.message.location.longitude}</p>
+                            <p className="card-text">{this.props.message.location.temperature}</p>
+                        </div>
+                    </div>
+
                 </div>
 
                 <ul>

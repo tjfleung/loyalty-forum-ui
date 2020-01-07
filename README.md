@@ -1,3 +1,16 @@
+# Loyalty Forum UI
+
+Frontend project for custom forum application.
+
+## Running app with HTTPS
+
+`HTTPS=true npm start`
+
+Runs app in development mode over HTTPS.
+Open [https://localhost:3000](https://localhost:3000) to view it in the browser.
+
+# Starter Readme from Create-React-App
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

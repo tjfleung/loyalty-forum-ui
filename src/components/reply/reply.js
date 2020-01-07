@@ -65,6 +65,7 @@ class Reply extends React.Component {
                            value={this.state.location}
                            onChange={e => this.setState({location: e.target.value})}
                            placeholder="Location"
+                           required
                     />
                 </div>
 

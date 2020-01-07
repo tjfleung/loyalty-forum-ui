@@ -19,8 +19,8 @@ class App extends Component {
     }
 
     fetchAllMessages() {
-        //const url = 'http://localhost:5000/messages/';
-        const url = 'http://loyaltyforumapi-env-1.i6bzdysfve.ca-central-1.elasticbeanstalk.com/messages/';
+        const url = 'http://localhost:5000/messages/';
+        //const url = 'http://loyaltyforumapi-env-1.i6bzdysfve.ca-central-1.elasticbeanstalk.com/messages/';
 
         fetch(url)
             .then(res => {
@@ -54,7 +54,10 @@ class App extends Component {
 
         axios.post(url, {
             'username': this.state.username,
-            'comment': this.state.comment
+            'comment': this.state.comment,
+            'location': {
+                'location': this.state.location
+            }
         }, axiosConfig)
             .then(response => this.setState({resp: response.data}))
             .catch(error => {
@@ -69,6 +72,7 @@ class App extends Component {
             'messages': []
         });
 
+        this.fetchAllMessages()
     }
 
     resetPage() {
@@ -80,12 +84,13 @@ class App extends Component {
                 resp: '',
                 'messages': []
             }
-        )
+        );
+        this.fetchAllMessages()
     }
 
     getMessagesByUsername() {
-        const url = 'http://localhost:5000/messages/' + this.state.username;
-        //const url = 'http://loyaltyforumapi-env-1.i6bzdysfve.ca-central-1.elasticbeanstalk.com/messages/' + this.state.username;
+        //const url = 'http://localhost:5000/messages/' + this.state.username;
+        const url = 'http://loyaltyforumapi-env-1.i6bzdysfve.ca-central-1.elasticbeanstalk.com/messages/' + this.state.username;
 
         fetch(url)
             .then(res => {
@@ -123,6 +128,7 @@ class App extends Component {
                                value={this.state.location}
                                onChange={e => this.setState({location: e.target.value})}
                                placeholder="Location"
+                               required
                         />
                     </div>
 
