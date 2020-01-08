@@ -21,8 +21,8 @@ class Message extends React.Component {
                 <div className="card-deck">
                     <div className="card">
                         <div className="card-body">
-                            <h6 className="card-title">{this.props.message.username}</h6>
-                            <h6 className="card-subtitle">{this.props.message.postedDate}</h6>
+                            <h3 className="card-title">{this.props.message.username}</h3>
+                            <h6 className="card-subtitle text-muted">{this.props.message.postedDate}</h6>
                             <p className="card-text">{this.props.message.comment}</p>
                             <button className="btn btn-primary" onClick={this.prepareReply.bind(this)}>Reply</button>
                             {this.state.isReply ? <Reply id={this.props.message.id}/> : null}
@@ -31,9 +31,13 @@ class Message extends React.Component {
 
                     <div className="card">
                         <div className="card-body">
-                            <h6 className="card-title">{this.props.message.location.location}</h6>
-                            <p className="card-subtitle">{this.props.message.location.latitude},{this.props.message.location.longitude}</p>
-                            <p className="card-text">{this.props.message.location.temperature}</p>
+                            <h3 className="card-title">{this.props.message.location.location}</h3>
+                            <h6 className="card-subtitle text-muted">{this.props.message.location.latitude},{this.props.message.location.longitude}
+                                <ion-icon name="locate"></ion-icon>
+                            </h6>
+                            <p className="card-text">{this.props.message.location.temperature}
+                                <ion-icon name="thermometer"></ion-icon>
+                            </p>
                         </div>
                     </div>
 
