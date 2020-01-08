@@ -28,7 +28,10 @@ class Reply extends React.Component {
 
         axios.post(url, {
             'username': this.state.username,
-            'comment': this.state.comment
+            'comment': this.state.comment,
+            'location' : {
+                'location': this.state.location
+            }
         }, axiosConfig)
             .then(response => this.setState({resp: response.data}))
             .catch(error => {
